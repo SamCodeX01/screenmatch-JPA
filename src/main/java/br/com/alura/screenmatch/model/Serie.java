@@ -1,14 +1,18 @@
 package br.com.alura.screenmatch.model;
 
 import br.com.alura.screenmatch.service.ConsultaChatGT;
+import jakarta.persistence.*;
 
 import java.util.OptionalDouble;
 
+@Entity
+@Table(name = "series")
 public class Serie {
-    private String titulo;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) private Long id;
+    @Column(unique = true) private String titulo;
     private Integer totalTemporadas;
     private Double avaliacao;
-    private Categoria genero;
+    @Enumerated(EnumType.STRING) private Categoria genero;
     private String atores;
     private String poster;
     private String sinopse;
@@ -20,8 +24,8 @@ public class Serie {
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
-        this.sinopse = dadosSerie.sinopse();
-        //this.sinopse = ConsultaChatGT.obterTraducao(dadosSerie.sinopse()).trim();
+        //this.sinopse = dadosSerie.sinopse();
+        this.sinopse = ConsultaChatGT.obterTraducao(dadosSerie.sinopse()).trim();
     }
 
     public String getTitulo() {

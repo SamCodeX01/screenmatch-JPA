@@ -18,3 +18,25 @@ public class ConsultaChatGT {
         return resposta.getChoices().get(0).getText();
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
